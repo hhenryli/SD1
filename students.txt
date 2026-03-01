@@ -7,4 +7,7 @@ random
 synergist
 usnews
 hl3547
-hl3547
+holist
+random
+synergist
+usnews

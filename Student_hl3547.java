@@ -20,20 +20,14 @@ public class Student_hl3547 implements Student {
 
   // P(one random opponent scores less than x), where opponent = Uniform[0,S] + Uniform[0,W]
   private double pBeatOne(double x, double S, double W) {
-    if (S <= 0 || W <= 0) return x > 0 ? 1.0 : 0.0;
-    double lo = Math.min(S, W);
-    double hi = Math.max(S, W);
-    double total = S + W;
-    x = Math.max(0, Math.min(x, total)); // clamp
-    if (x <= lo) {
-      return (x * x) / (2 * S * W);
-    } else if (x <= hi) {
-      return (x - lo / 2.0) / hi;
-    } else {
-      double diff = total - x;
-      return 1.0 - (diff * diff) / (2 * S * W);
+    int trials = 10000;
+    int wins = 0;
+    for (int i = 0; i < trials; i++) {
+        double opponentScore = Math.random() * S + Math.random() * W;
+        if (x > opponentScore) wins++;
     }
-  }
+    return (double) wins / trials;
+}
 
   public int[] getApplications(
       int N,
